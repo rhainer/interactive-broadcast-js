@@ -43,6 +43,7 @@ type EventFormState = {
     archiveEvent: boolean,
     redirectUrl: string,
     rtmpUrl: string,
+    smsNumber: string,
     dateTimeStart: string,
     dateTimeEnd: string,
     uncomposed: boolean
@@ -61,6 +62,7 @@ const eventFields = [
   'archiveEvent',
   'redirectUrl',
   'rtmpUrl',
+  'smsNumber',
   'dateTimeStart',
   'dateTimeEnd',
   'uncomposed',
@@ -94,6 +96,7 @@ class EventForm extends Component {
         celebrityUrl: '',
         redirectUrl: '',
         rtmpUrl: '',
+        smsNumber: '',
         uncomposed: true,
       },
       submitting: false,
@@ -264,6 +267,12 @@ class EventForm extends Component {
           <div className="label">RTMP URL (optional)</div>
           <Icon className="icon" name="link" style={{ color: 'darkgrey' }} />
           <input type="url" className="enabled" name="rtmpUrl" value={fields.rtmpUrl} onChange={handleChange} />
+        </div>
+
+        <div className="input-container">
+          <div className="label">SMS Number (optional)</div>
+          <Icon className="icon" name="link" style={{ color: 'darkgrey' }} />
+          <input type="text" className="enabled" name="smsNumber" value={fields.smsNumber} onChange={handleChange} />
         </div>
 
         <div className="input-container checkbox">

@@ -28,6 +28,7 @@ declare type BroadcastEvent = {
   stageSessionId: string,
   archiveUrl?: string,
   rtmpUrl?: string,
+  smsNumber?: string,
   redirectUrl: string,
   uncomposed: boolean,
   showStartedAt: string,
