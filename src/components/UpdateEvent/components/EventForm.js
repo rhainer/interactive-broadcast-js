@@ -44,6 +44,8 @@ type EventFormState = {
     redirectUrl: string,
     rtmpUrl: string,
     smsNumber: string,
+    confBridgeNumber: string,
+    confBridgePIN: string,
     dateTimeStart: string,
     dateTimeEnd: string,
     uncomposed: boolean
@@ -63,6 +65,8 @@ const eventFields = [
   'redirectUrl',
   'rtmpUrl',
   'smsNumber',
+  'confBridgeNumber',
+  'confBridgePIN',
   'dateTimeStart',
   'dateTimeEnd',
   'uncomposed',
@@ -97,6 +101,8 @@ class EventForm extends Component {
         redirectUrl: '',
         rtmpUrl: '',
         smsNumber: '',
+        confBridgeNumber: '',
+        confBridgePIN: '',
         uncomposed: true,
       },
       submitting: false,
@@ -273,6 +279,18 @@ class EventForm extends Component {
           <div className="label">SMS Number (optional)</div>
           <Icon className="icon" name="link" style={{ color: 'darkgrey' }} />
           <input type="text" className="enabled" name="smsNumber" value={fields.smsNumber} onChange={handleChange} />
+        </div>
+
+        <div className="input-container">
+          <div className="label">Conference Bridge Number (optional)</div>
+          <Icon className="icon" name="link" style={{ color: 'darkgrey' }} />
+          <input type="text" className="enabled" name="confBridgeNumber" value={fields.confBridgeNumber} onChange={handleChange} />
+        </div>
+
+        <div className="input-container">
+          <div className="label">Conference Bridge PIN (optional)</div>
+          <Icon className="icon" name="link" style={{ color: 'darkgrey' }} />
+          <input type="text" className="enabled" name="confBridgePIN" value={fields.confBridgePIN} onChange={handleChange} />
         </div>
 
         <div className="input-container checkbox">
