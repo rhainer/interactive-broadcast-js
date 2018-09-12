@@ -54,6 +54,11 @@ const initialState = (): BroadcastState => ({
     order: [],
   },
   chats: {},
+  fanSMS: [
+    'this is a message hello hello',
+    'this is a message hello hello hello hello',
+    'this is a message hello hello hello hello and it is an even longer message than the others',
+  ],
   stageCountdown: -1,
   viewers: 0,
   interactiveLimit: 0,
@@ -158,6 +163,8 @@ const broadcast = (state: BroadcastState = initialState(), action: BroadcastActi
       return R.dissocPath(['chats', action.chatId], state);
     case 'NEW_CHAT_MESSAGE':
       return R.assocPath(['chats', action.chatId, 'messages'], R.append(action.message, R.path(['chats', action.chatId, 'messages'], state)), state);
+    case 'NEW_FAN_SMS':
+      return R.assoc('fanSMS', [...state.fanSMS, action.message], state)
     case 'MINIMIZE_CHAT':
       {
         let modifiedState;

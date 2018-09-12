@@ -98,6 +98,7 @@ declare type BroadcastState = {
   participants: BroadcastParticipants,
   activeFans: ActiveFans,
   chats: ProducerChats,
+  fanSMS: string[],
   stageCountdown: number,
   viewers: number,
   interactiveLimit: number,
@@ -193,12 +194,17 @@ declare type BroadcastAction =
   { type: 'DISPLAY_CHAT', chatId: ChatId, display: boolean } |
   { type: 'MINIMIZE_CHAT', chatId: ChatId, minimize: boolean } |
   { type: 'NEW_CHAT_MESSAGE', chatId: ChatId, message: ChatMessage } |
+  { type: 'NEW_FAN_SMS', message: string } |
   { type: 'UPDATE_STAGE_COUNTDOWN', stageCountdown: number } |
   { type: 'UPDATE_VIEWERS', viewers: number } |
   { type: 'SET_INTERACTIVE_LIMIT', interactiveLimit: number } |
   { type: 'SET_DISCONNECTED', disconnected: boolean } |
   { type: 'SET_RECONNECTING', reconnecting: boolean } |
-  { type: 'SET_ARCHIVING', archiving: boolean };
+  { type: 'SET_ARCHIVING', archiving: boolean } |
+  { type: 'PARTICIPANT_AV_PROPERTY_CHANGED',
+    participantType: UserRole,
+    update: ParticipantAVPropertyUpdate
+  };
 
 declare type FanAction =
   { type: 'SET_NEW_FAN_ACKD', newFanSignalAckd: boolean } |

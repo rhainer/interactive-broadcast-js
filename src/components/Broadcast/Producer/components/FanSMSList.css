@@ -1,0 +1,56 @@
+.FanSMSList {
+  width: 320px;
+  padding: 10px 25px;
+}
+
+.FanSMSList ul {
+  list-style-type: none;
+  padding: 0;
+  position: relative;
+}
+
+.FanSMSList ul li {
+  border-radius: 10px;
+  padding: 20px 10px;
+  margin: 10px 0;
+  position: relative;
+  width: 90%;
+  text-align: unset;
+  font-size: 11px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.FanSMSList ul li:after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-bottom: 0;
+	margin-top: -10px;
+}
+
+.FanSMSList ul li.even {
+  background-color: #ddfffd;
+}
+
+.FanSMSList ul li.odd {
+  background-color: #fff9dd;
+}
+
+.FanSMSList ul li.even:after {
+	right: 0;
+	border-left-color: #ddfffd;
+  border-right: 0;
+  margin-right: -20px;
+}
+
+.FanSMSList ul li.odd:after {
+	left: 0;
+	border-right-color: #fff9dd;
+  border-left: 0;
+  margin-left: -20px;
+}

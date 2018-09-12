@@ -74,7 +74,15 @@ const onSignal = (dispatch: Dispatch): SignalListener => ({ type, data }: Signal
     ];
     R.forEach(dispatch, actions);
   }
+  if (signalType === 'fanSMS' && !!signalData) {
+    dispatch(onFanSMS(signalData));
+  }
 };
+
+const onFanSMS = (message: any) => ({
+  type: 'NEW_FAN_SMS',
+  message: message.toString()
+})
 
 const restoreVolume = (adminId: string, fanUrl: string, userType: UserRole) => {
   try {
