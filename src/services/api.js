@@ -103,6 +103,7 @@ const getEventWithCredentials = (data: { adminId: UserId, userType: UserRole }, 
   post(`event/create-token-${data.userType}`, data, true, authToken);
 const getEmbedEventWithCredentials = (data: { adminId: UserId, userType: UserRole }, authToken: AuthToken): Promise<HostCelebEventData> =>
   post(`event/create-token/${data.adminId}/${data.userType}`, data, true, authToken);
+const createSipConnection = (eventId: string, authToken: AuthToken): Promise<void> => post(`event/${eventId}/sip/start`, null, true, authToken);
 /** Exports */
 
 module.exports = {
@@ -124,4 +125,5 @@ module.exports = {
   url,
   getEventWithCredentials,
   getEmbedEventWithCredentials,
+  createSipConnection
 };
