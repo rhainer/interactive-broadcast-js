@@ -82,7 +82,7 @@ const onSignal = (dispatch: Dispatch): SignalListener => ({ type, data }: Signal
 const onFanSMS = (message: any) => ({
   type: 'NEW_FAN_SMS',
   message: message.toString()
-})
+});
 
 const restoreVolume = (adminId: string, fanUrl: string, userType: UserRole) => {
   try {
@@ -439,6 +439,38 @@ const updateActiveFans: ThunkActionCreator = (): Thunk =>
     });
   };
 
+
+/**
+ * Set the producer connection in Firebase.  This is not the best
+ * place to do this since we likely won't be connected to the session
+ * when we make our first attempt.
+ */
+const setProducerConnection =  async(ref, retries = 5) => {
+
+  const retry = () => {
+    if (retries > 0) {
+      setTimeout(() => setProducerConnection(ref, retries - 1), 1500);
+    }
+  }
+  const producerConnection = R.compose(
+    R.pathOr(null, ['stream', 'connection', 'connectionId']),
+    R.head,
+    R.values,
+    R.pathOr({}, ['publishers', 'camera'])
+  )(opentok.state('backstage'));
+
+  if (producerConnection) {
+    try {
+      await ref.update({ producerConnection });
+    } catch (error) {
+      retry()
+    }
+  }
+
+  retry();
+
+}
+
 const connectBroadcast: ThunkActionCreator = (event: BroadcastEvent): Thunk =>
   async (dispatch: Dispatch, getState: GetState): AsyncVoid => {
     const credentialProps = ['apiKey', 'sessionId', 'stageSessionId', 'stageToken', 'backstageToken'];
@@ -460,6 +492,7 @@ const connectBroadcast: ThunkActionCreator = (event: BroadcastEvent): Thunk =>
         dispatch(setBlockUserAlert());
       } else {
         try {
+          setProducerConnection(activeBroadcastRef);
           await activeBroadcastRef.update({
             producerActive: true,
             privateCall: null,
@@ -467,6 +500,7 @@ const connectBroadcast: ThunkActionCreator = (event: BroadcastEvent): Thunk =>
           });
           activeBroadcastRef.onDisconnect().update({
             producerActive: false,
+            producerConnection: null,
             privateCall: null,
           });
           dispatch({ type: 'PRESENCE_CONNECTING', connecting: false });
