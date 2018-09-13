@@ -75,7 +75,7 @@ const onSignal = (dispatch: Dispatch): SignalListener => ({ type, data }: Signal
     R.forEach(dispatch, actions);
   }
   if (signalType === 'fanSMS' && !!signalData) {
-    dispatch(onFanSMS(signalData));
+    dispatch(onFanSMS(signalData.message));
   }
 };
 

@@ -54,11 +54,7 @@ const initialState = (): BroadcastState => ({
     order: [],
   },
   chats: {},
-  fanSMS: [
-    'this is a message hello hello',
-    'this is a message hello hello hello hello',
-    'this is a message hello hello hello hello and it is an even longer message than the others',
-  ],
+  fanSMS: [],
   stageCountdown: -1,
   viewers: 0,
   interactiveLimit: 0,

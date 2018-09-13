@@ -22,7 +22,7 @@ class FanSMSList extends Component {
       <div className="FanSMSList">
         <ul className="sms-list">
         { messages.map((m, idx) =>
-          <CopyToClipboard text={`Fan SMS: ${m}`} onCopyText="Fan Message">
+          <CopyToClipboard key={`${idx}${m}`}text={`Fan SMS: ${m}`} onCopyText="Fan Message">
             <li key={idx} className={ smsClass(idx)}> { m } </li>
           </CopyToClipboard>
           )
