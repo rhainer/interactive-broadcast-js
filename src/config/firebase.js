@@ -1,11 +1,10 @@
-const firebase = {
-  apiKey: 'AIzaSyA_wDFIkC1KBTvcmk1lQFZv1zZ5vM7r5TY', // firebase apikey
-  authDomain: 'spotlight-rh.firebaseapp.com', // firebase authDomain
-  databaseURL: 'https://spotlight-rh.firebaseio.com', // firebase databaseURL
-  projectId: 'spotlight-rh', // firebase projectId
-  storageBucket: 'spotlight-rh.appspot.com', // firebase storageBucket
-  messagingSenderId: '1010820524374',  // firebase messagingSenderId
+var config = {
+  apiKey: "AIzaSyDmR9cad6J7HxVxXY7MhYmGd0Cqinr3Fko",
+  authDomain: "ib-nexmo.firebaseapp.com",
+  databaseURL: "https://ib-nexmo.firebaseio.com",
+  projectId: "ib-nexmo",
+  storageBucket: "ib-nexmo.appspot.com",
+  messagingSenderId: "555776231722"
 };
 
-export default firebase;
- 
+export default config;

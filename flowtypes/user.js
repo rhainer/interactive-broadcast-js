@@ -32,7 +32,7 @@ declare type UserCredentials = {
 
 declare type HostCeleb = 'host' | 'celebrity';
 declare type Fan = 'fan' | 'backstageFan';
-declare type UserRole = 'producer' | HostCeleb | Fan;
+declare type UserRole = 'producer' | HostCeleb | Fan | 'sip';
 
 declare type UserMap = {[id: UserId]: User};
 declare type CurrentUserState = null | User;

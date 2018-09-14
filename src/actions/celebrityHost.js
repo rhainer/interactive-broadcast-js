@@ -114,6 +114,9 @@ const opentokConfig = (dispatch: Dispatch, { userCredentials, userType }: UserDa
     const otStreamEvents: StreamEventType[] = ['streamCreated', 'streamDestroyed'];
     const handleStreamEvent: StreamEventHandler = async ({ type, stream }: OTStreamEvent): AsyncVoid => {
       const user: UserRole = R.prop('userType', JSON.parse(stream.connection.data));
+      if (user === 'sip') {
+        return;
+      }
       const streamCreated = R.equals(type, 'streamCreated');
       if (R.equals(user, 'producer')) {
         streamCreated ? opentok.createEmptySubscriber('stage', stream) : dispatch(endPrivateCall(userType, true));
@@ -128,7 +131,7 @@ const opentokConfig = (dispatch: Dispatch, { userCredentials, userType }: UserDa
             subscribeAction = (user === 'fan') ?
               logAction.hostSubscribesToFan :
               logAction.hostSubscribesToCelebrity;
-          } 
+          }
           try {
             analytics.log(subscribeAction, logVariation.attempt);
             await opentok.subscribe('stage', stream);

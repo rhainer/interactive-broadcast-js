@@ -106,6 +106,10 @@ const opentokConfig = (dispatch: Dispatch, getState: GetState, userCredentials: 
     // Assign listener for stream changes
     const otStreamEvents: StreamEventType[] = ['streamCreated', 'streamDestroyed'];
     const handleStreamEvent: StreamEventHandler = ({ type, stream }: OTStreamEvent) => {
+      const user: UserRole = R.prop('userType', JSON.parse(stream.connection.data));
+      if (user === 'sip') {
+        return;
+      }
       const isStage = R.propEq('name', 'stage', instance);
       const backstageFanLeft = type === 'streamDestroyed' && !isStage;
       const connectionData: { userType: UserRole } = JSON.parse(stream.connection.data);
